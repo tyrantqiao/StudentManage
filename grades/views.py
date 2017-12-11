@@ -33,9 +33,9 @@ def inquire(request):
     if request.method=='GET':
         inquire_student=Student.objects.all().filter(student_id=request.GET['student_id'])
         response=JsonResponse({'response':serialize('json',inquire_student)})
-        return HttpResponse(response,status=200)
+        return response
     else:
-        return HttpResponse('Cannot find',status=404)
+        return JsonResponse({'e':'not found'})
 
 
 

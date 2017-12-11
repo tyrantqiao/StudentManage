@@ -10,12 +10,11 @@
     <h3>快速查询成绩</h3><br>
     <div class="error_div"></div>   
     <div>
-        <form action="{% url 'grades:inquire' %}",method="GET">
-       
+        <form action="./inquire/",method="GET">      
             <table>
                 {{ form.as_table }}
             </table>
-            <input type='submit' value="Submit">
+            <input type='submit' value="Submit" />
         </form>
     </div>
     <br>
@@ -28,7 +27,7 @@
                     data:$(this).serialize(),
                     type:$(this).attr('method'),
                     url:$(this).attr('action'),
-                    Success: function(response){
+                    success: function(response){
                         $('#success_div').html(response);
                     },
                     error: function(e,x,r){
