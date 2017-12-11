@@ -1,0 +1,30 @@
+{% include 'grades/head.html' %}
+    <title>欢迎来到学生管理系统</title>
+</head>
+
+<body>
+    <h3>今天是{{ nowtime.month }}月{{ nowtime.day }}号</h3>
+    <br>
+    <h1>欢迎来到学生成绩系统</h1>
+    <br>
+    <h3>快速查询成绩</h3><br>
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error {{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+    <form action="{% url 'grades:index' %}",method="GET">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type='button' value="submit">
+    </form>
+    <br>
+    <div>你查询的{{ form.student_id }}的结果是{{ inquire_student }}</div>
+    <br>
+    <a href="{% url 'grades:details' %}">更多资讯点击此处进行查询</a>
+    <br>
+    <a href="{% url 'grades:manager' %}">管理成绩请点击此处</a>
+    <br>
+{% include 'grades/footer.html' %}
+

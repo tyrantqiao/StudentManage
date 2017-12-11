@@ -1,0 +1,18 @@
+{% include 'grades/head.html' %}
+	<title>students' list</title>
+</head>
+<body>
+	<h1>你好students' list(grade)</h1>
+	{% if all_students %}
+		<ul>
+		{% for student in all_student %}
+			<li>{{ student.name }}</li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p> not available </p>
+	{% endif %}
+    <br>
+    <br><a href="{% url 'index' %}">返回到主页</a>
+    <br>
+{% include 'grades/footer.html' %}
