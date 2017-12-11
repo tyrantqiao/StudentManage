@@ -3,22 +3,16 @@ from django.shortcuts import render
 from django.template import Context,loader
 from django.forms import formset_factory
 from .forms import SCForm,StudentForm,CourseForm,InquireForm
-# Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .models import Student,Course,SC
 from django.utils import timezone
 from django.shortcuts import render_to_response
+import json
+from django.core.serializers import serialize
+
 def index(request):
     now=timezone.now()
-    if request.method=='GET':
-       form=InquireForm(request.GET)
-       if form.is_valid():
-           #cd=form.cleanned_data
-           print(form['student_id'])
-           student=Student.objects.all().filter(student_id=form['student_id'])
-           return render_to_response('grades/welcome.html',{'inquire_student':student,'form':form})
-    else:
-        form=InquireForm()
+    form=InquireForm()
     return render_to_response('grades/welcome.html',{'nowtime':now,'form':form})
 
     '''
@@ -34,6 +28,16 @@ def lists(request):
     nowtime=timezone.now()
     all_students=Student.objects.all()
     return render(request,'grades/lists.html',{'all_students':all_students,'nowtime':nowtime})
+
+def inquire(request):
+    if request.method=='GET':
+        inquire_student=Student.objects.all().filter(student_id=request.GET['student_id'])
+        response=JsonResponse({'response':serialize('json',inquire_student)})
+        return HttpResponse(response,status=200)
+    else:
+        return HttpResponse('Cannot find',status=404)
+
+
 
 def details(request):
     pass
