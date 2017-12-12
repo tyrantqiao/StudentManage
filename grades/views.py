@@ -34,8 +34,9 @@ def inquire(request):
         inquire_id=request.GET.get('student_id')
         print(inquire_id)
         inquire_student=Student.objects.all().filter(student_id=inquire_id)
-        response=JsonResponse({'response':serialize('json',inquire_student)})
-        return  response
+        if inquire_student==None:
+            return HttpResponse(json.dumps({'error':'not found'}),status=404)
+        return  HttpResponse(inquire_student[0])
     else:
         return HttpResponse(json.dumps({'error':'notfound'}),content_type="application/json")
 

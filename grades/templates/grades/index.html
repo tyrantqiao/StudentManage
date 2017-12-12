@@ -1,14 +1,15 @@
 {% extends 'grades/base.html' %}
 {% block title %}学生管理系统{% endblock %}
 {% block content %}
-<form id="inquire_form" action="{% url 'grades:inquire' %}" method="GET">
+    <form id="inquire_form" action="{% url 'grades:inquire' %}" method="GET">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="查询" />
     </form>
-    <div class="error_div"></div>
+    <div div="error_div"></div>
     <br>
-    查询结果是<div class="success_div"></div> 
+    查询结果是<div id="success_div"></div> 
+    <br>
 {% endblock %}
 {% block footer %}
     <a href="{% url 'grades:details' %}">更多咨询</a>
@@ -21,12 +22,12 @@
             $.ajax({
                 type: $(this).attr('method'),
                 url: $(this).attr('action'),
-                data: $(this).serialize,
-                success: function(json){
-                    $('#success_div').append(json);
+                data: { student_id : $('#id_student_id').val() },
+                success: function(result){
+                    $("#success_div").text(result);
                     console.log("success");
                 },
-                error: function(e,x,r){
+                error: function(xhr,status,error){
                     $('#error_div').html(e.status+":"+e.responseText);
                     console.log("error");
                 }
