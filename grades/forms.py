@@ -18,5 +18,5 @@ class SCForm(forms.Form):
     score=forms.FloatField()
 
 class InquireForm(forms.Form):
-    student_id=forms.CharField(label="输入你的学号:",required=False)
+    student_id=forms.CharField(label="输入你的学号:")
 

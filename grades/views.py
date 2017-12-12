@@ -11,9 +11,9 @@ import json
 from django.core.serializers import serialize
 
 def index(request):
-    now=timezone.now()
+    #now=timezone.now()
     form=InquireForm()
-    return render_to_response('grades/welcome.html',{'nowtime':now,'form':form})
+    return render_to_response('grades/index.html',{'form':form})
 
     '''
     if 'student_id' in request.GET:
@@ -31,11 +31,13 @@ def lists(request):
 
 def inquire(request):
     if request.method=='GET':
-        inquire_student=Student.objects.all().filter(student_id=request.GET['student_id'])
+        inquire_id=request.GET.get('student_id')
+        print(inquire_id)
+        inquire_student=Student.objects.all().filter(student_id=inquire_id)
         response=JsonResponse({'response':serialize('json',inquire_student)})
-        return response
+        return  response
     else:
-        return JsonResponse({'e':'not found'})
+        return HttpResponse(json.dumps({'error':'notfound'}),content_type="application/json")
 
 
 

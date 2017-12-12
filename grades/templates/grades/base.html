@@ -1,0 +1,28 @@
+{% load static from staticfiles %}
+<!doctype html>
+<html lang="zh_CN">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Default Title{% endblock %}</title>
+        <script src="{% static 'grades/jquery-3.2.1.min.js' %}">
+        </script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            {% block header %}
+            {% endblock %}
+        </header>
+        
+        {% block content %}
+        {% endblock %}
+        
+        <footer>
+            {% block footer %}
+            {% endblock %}
+        </footer>
+        {% block javascript %}{% endblock %}
+    </body>
+</html>
