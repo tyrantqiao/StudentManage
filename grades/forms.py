@@ -13,7 +13,7 @@ class CourseForm(forms.Form):
     credit=forms.FloatField()
 
 class SCForm(forms.Form):
-    student=forms.ModelMultipleChoiceField(queryset=Student.objects.all())
+    student=forms.ModelMultipleChoiceField(queryset=Student.DB.all())
     course=forms.ModelMultipleChoiceField(queryset=Course.objects.all())
     score=forms.FloatField()
 
