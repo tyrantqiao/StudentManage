@@ -27,6 +27,8 @@ class SCAdmin(admin.ModelAdmin):
     search_fields=('student__class_id','course__course_id','student__name','student__student_id','student__gender','course__course_name','course__credit','score')
     raw_id_fields=('student','course',)
 
+
+
 admin.site.register(Student,StudentAdmin)
 admin.site.register(SC,SCAdmin)
 admin.site.register(Course,CourseAdmin)

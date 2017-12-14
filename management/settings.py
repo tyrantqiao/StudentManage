@@ -116,6 +116,10 @@ USE_L10N = True
 # "from django.utils import timezone"  "now=timezone.now()"
 USE_TZ = True
 
+PROJECT_DIR=os.path.abspath(os.path.dirname(__file__))
+
+MEDIA_ROOT=os.path.join(PROJECT_DIR,'media')
+MEDIA_URL='/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
